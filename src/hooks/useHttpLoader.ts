@@ -1,14 +1,23 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const useHttpLoader = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  const wait = (promise: Promise<any>) => {
-    setLoading(true);
-    promise.then(() => setLoading(false));
-  };
+  const wait = <T>(p: Promise<T>, onLoad?: (v: T) => void, onError?: (err) => void) => {
+    setLoading(true)
 
-  return { loading, wait };
-};
+    return p
+      .then((r) => {
+        onLoad && onLoad(r)
+        setLoading(false)
+      })
+      .catch((err) => {
+        onError && onError(err)
+        setLoading(false)
+      })
+  }
 
-export default useHttpLoader;
+  return { loading, wait }
+}
+
+export default useHttpLoader

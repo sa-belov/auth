@@ -1,0 +1,40 @@
+.topMenu {
+  position: relative;
+  display: inline-flex;
+  gap: 2em;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: var(--header-height);
+  background: var(--background);
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.link:hover {
+  color: var(--gray);
+}
+
+.link:active,
+.linkActive {
+  text-decoration: none;
+  color: var(--success);
+}
+
+.userInfo {
+  position: absolute;
+  right: 2em;
+  color: var(--success);
+}
+
+.logout {
+  color: #fff;
+}
+
+.logout:hover {
+  color: indianred;
+  cursor: pointer;
+}

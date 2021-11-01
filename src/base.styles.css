@@ -1,0 +1,19 @@
+:root {
+  --header-height: 8vh;
+  --input-height: 30px;
+  --background: #011627;
+  --gray: #8a95a5;
+  --success: #b9c6ae;
+}
+
+.text--danger {
+  color: indianred;
+}
+
+.text--success {
+  color: var(--success);
+}
+
+* {
+  box-sizing: border-box;
+}

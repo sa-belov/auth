@@ -1,0 +1,18 @@
+.button {
+  padding: 4px 1em;
+  border: 1px solid var(--background);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  filter: brightness(120%);
+}
+
+.primary {
+  background: var(--gray);
+}
+
+.secondary {
+  background: var(--success);
+}

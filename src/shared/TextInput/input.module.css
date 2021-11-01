@@ -1,0 +1,31 @@
+.inputBlock {
+  width: 100%;
+  height: calc(12px + var(--input-height));
+}
+
+.label {
+  width: 100%;
+  padding-left: 0;
+  display: block;
+  color: var(--gray);
+  line-height: 12px;
+  font-size: 12px;
+}
+
+.input {
+  width: 100%;
+  padding-left: 0;
+  height: var(--input-height);
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--background);
+}
+
+.input:focus {
+  border: none;
+  border-bottom: 1px solid cornflowerblue;
+}
+
+.input:invalid {
+  border-bottom: 1px solid red;
+}

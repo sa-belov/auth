@@ -1,12 +1,16 @@
-import React, { ButtonHTMLAttributes, FC } from 'react';
-import styles from './Button.module.sass';
+import { ButtonHTMLAttributes, FC } from 'react'
+import styles from './button.module.css'
 
-const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({ children, ...props }) => {
+interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  styleType: 'primary' | 'secondary'
+}
+
+const Button: FC<IProps> = ({ children, styleType = 'primary', ...props }) => {
   return (
-    <button className={styles.button} {...props}>
+    <button className={`${styles.button} ${styles[styleType]}`} {...props}>
       {children}
     </button>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button
