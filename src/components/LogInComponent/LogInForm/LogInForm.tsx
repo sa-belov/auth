@@ -1,7 +1,9 @@
 import { useFormik } from 'formik';
 import Button from '../../../shared/Button/Button';
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
+import useHttpLoader from '../../../hooks/useHttpLoader';
+import { auth } from '../../../pages/Login/login.api';
 
 interface FormValues {
   password: string;
@@ -17,21 +19,33 @@ const signUpSchema = Yup.object({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
     .required('Password is required')
-    .uppercase('воспользуйтесь большой буквой')
     .min(4, 'Password is too short - should be 4 chars min')
     .max(10, 'Password is too long'),
 });
 
-const onSubmit = (values: FormValues) => {
-  alert(JSON.stringify(values, null, 2));
-};
-
 const LogInForm = () => {
+  const { loading, wait } = useHttpLoader();
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const onSubmit = (values: FormValues) => {
+    wait(
+      auth({ email: values.email, password: values.password })
+        .then((resp) => {
+          alert(JSON.stringify(resp, null, 2));
+          setErrorMessage('');
+        })
+        .catch((err) => {
+          setErrorMessage(err.message);
+        })
+    );
+  };
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: signUpSchema,
-    onSubmit: onSubmit,
+    onSubmit,
   });
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
@@ -50,7 +64,9 @@ const LogInForm = () => {
         />
         {formik.touched.password && formik.errors.password ? <div>{formik.errors.password}</div> : null}
       </div>
-      <Button type="submit">Sign up</Button>
+      {errorMessage && <span style={{ color: 'red' }}>{errorMessage}</span>}
+      {!loading && <Button type="submit">Sign up</Button>}
+      {loading && <span style={{ color: 'green' }}>Loading...</span>}
     </form>
   );
 };

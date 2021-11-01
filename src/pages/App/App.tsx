@@ -1,6 +1,7 @@
 import React from 'react';
 import appRoutes from './app.router';
 import { Route, Switch } from 'react-router-dom';
+import TopMenu from './TopMenu/TopMenu';
 
 function App() {
   const renderRoutes = appRoutes.map((route) => (
@@ -9,6 +10,7 @@ function App() {
 
   return (
     <div className="App">
+      <TopMenu />
       <Switch>{renderRoutes}</Switch>
     </div>
   );
